@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,13 @@ public class LocationService extends Service {
     static final String TAG = "locationService";
     private static final String NOTIFICATION_CHANNEL_ID = "com.example.issue183986649.channel";
 
+    IMyService.Stub mBinder = new IMyService.Stub() {
+        @Override
+        public void sayHello() throws RemoteException {
+            Log.d(TAG, "hello world!");
+        }
+    };
+
     private Location mLocation = null;
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -46,8 +54,7 @@ public class LocationService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return mBinder;
     }
 
 

@@ -16,7 +16,7 @@ public class BtConnectionReceiver extends BroadcastReceiver {
 
         if (action.equals(BluetoothDevice.ACTION_ACL_CONNECTED)) {
             Log.d(TAG, "Bluetooth ACL Connected! Start Service");
-            AppEnvironment.INSTANCE.startService(context);
+            AppEnvironment.INSTANCE.startService(context.getApplicationContext());
         }
     }
 }
